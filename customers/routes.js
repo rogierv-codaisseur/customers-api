@@ -1,5 +1,7 @@
 const { Router } = require('express');
+
 const Customer = require('./model');
+const Company = require('../companies/model');
 
 const router = new Router();
 
@@ -12,7 +14,7 @@ router.get('/customers', (req, res, next) => {
 });
 
 router.get('/customers/:id', (req, res, next) => {
-  Customer.findById(req.params.id)
+  Customer.findById(req.params.id, { include: [Company] })
     .then(customer => {
       if (!customer) {
         return res.status(404).send({

@@ -1,36 +1,48 @@
-const Sequelize = require('sequelize')
-const sequelize = require('../db')
+const Sequelize = require('sequelize');
 
-const Customer = sequelize.define('customers', {
-  firstName: {
-    type: Sequelize.STRING,
-    field: 'first_name',
-    allowNull: false
+const sequelize = require('../db');
+const Company = require('../companies/model');
+
+const Customer = sequelize.define(
+  'customers',
+  {
+    firstName: {
+      type: Sequelize.STRING,
+      field: 'first_name',
+      allowNull: false
+    },
+    lastName: {
+      type: Sequelize.STRING,
+      field: 'last_name',
+      allowNull: false
+    },
+    bio: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    addressLine1: {
+      type: Sequelize.STRING,
+      field: 'address_line_1'
+    },
+    addressLine2: {
+      type: Sequelize.STRING,
+      field: 'address_line_2'
+    },
+    city: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    companyId: {
+      type: Sequelize.INTEGER,
+      field: 'company_id'
+    }
   },
-  lastName: {
-    type: Sequelize.STRING,
-    field: 'last_name',
-    allowNull: false
-  },
-  bio: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  addressLine1: {
-    type: Sequelize.STRING,
-    field: 'address_line_1'
-  },
-  addressLine2: {
-    type: Sequelize.STRING,
-    field: 'address_line_2'
-  },
-  city: {
-    type: Sequelize.STRING,
-    allowNull: false,
+  {
+    timestamps: false,
+    tableName: 'customers'
   }
-}, {
-  timestamps: false,
-  tableName: 'customers'
-})
+);
 
-module.exports = Customer
+Customer.belongsTo(Company);
+
+module.exports = Customer;

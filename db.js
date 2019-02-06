@@ -1,12 +1,17 @@
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize');
 
-const connectionString = process.env.DATABASE_URL || 'postgres://postgres:secret@localhost:5432/postgres'
-const sequelize = new Sequelize(connectionString, {define: { timestamps: false }})
+const connectionString =
+  process.env.DATABASE_URL ||
+  'postgres://postgres:secret@localhost:5432/postgres';
+const sequelize = new Sequelize(connectionString, {
+  define: { timestamps: false }
+});
 
-sequelize.sync()
+sequelize
+  .sync({ force: true })
   .then(() => {
-    console.log('Sequelize updated database schema')
+    console.log('Sequelize updated database schema');
   })
-  .catch(console.error)
+  .catch(console.error);
 
-module.exports = sequelize
+module.exports = sequelize;
