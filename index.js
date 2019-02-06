@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const middleware = require('./auth/middleware');
 const authRouter = require('./auth/routes');
 const customersRouter = require('./customers/routes');
 const companiesRouter = require('./companies/routes');
